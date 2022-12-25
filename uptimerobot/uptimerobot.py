@@ -77,6 +77,17 @@ class UptimeRobot(object):
         url += "&noJsonCallback=1&format=json"
         return self.requestApi(url)
 
+    def deleteMonitor(self, *args, **kwargs):
+        keys = ['id']
+        fields = {  "api_key"    : self.apiKey }
+        fields = kwargs_to_fields(keys, kwargs, fields)
+        
+        response = http.request("POST",
+                        self.baseUrl + "deleteMonitor", fields = fields
+                       
+        )
+        return json.loads(response.data.decode("utf-8"))
+
 
     def getMonitorById(self, monitorId):
         """
